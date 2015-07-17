@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Timeline</title>
+</head>
+<body>
+<% if(!!article){ %>
+	<% for(var i = 0;i<article.length;i++){ %>
+		<a href="/profile/<%= article[i].username %>"><%= article[i].username %></a> : <%= article[i].content %> <br>
+	<% } %>
+<% }else{ %>
+	你目前沒有好友唷
+<% } %>
+</body>
+</html>

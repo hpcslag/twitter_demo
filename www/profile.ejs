@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%= username %></title>
+	<style type="text/css">
+	@import url(http://c.boylett.uk/fonts/fontawesome/fontawesome.css);
+
+html, body { height: 100% }
+
+html { 
+  background: url(http://c.boylett.uk/images/wallpapers/009.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.widget
+{
+  position: relative;
+  width: 300px;
+  height: 350px;
+  margin: 50px auto;
+  background: #FFF;
+  border-radius: 5px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, .1);
+}
+
+.widget > .cover
+{
+  height: 160px;
+  overflow: hidden;
+}
+
+.widget > .cover > img
+{
+  width: 100%;
+  height: auto;
+  min-height: 160px;
+  border-radius: 4px 4px 0 0;
+}
+
+.widget > .photo
+{
+  position: absolute;
+  top: 85px;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  margin: 0 0 0 -55px;
+  border: 5px solid #FFF;
+  border-radius: 50%;
+}
+
+.widget > h1, .widget > h2, .widget > h3
+{
+  display: block;
+  margin: 10px 0;
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  color: #999;
+}
+
+.widget > h1
+{
+  margin: 60px 0 20px;
+  font-size: 26px;
+  color: #000;
+}
+
+.widget > h3 { font-size: 12px }
+
+.widget > ul
+{
+  position: absolute;
+  top: 20px;
+  left: 100%;
+  background: #2CDFD3;
+  border-radius: 0 3px 3px 0;
+}
+
+.widget > ul > li > a
+{
+  display: block;
+  padding: 5px 6px;
+  color: #FFF;
+  cursor: pointer;
+  text-align: center;
+  border-bottom: 1px solid #2CD5CA;
+  transition: background-color .3s;
+}
+
+.widget > ul > li:hover > a { background-color: #2CD5CA }
+.widget > ul > li:first-child > a { border-radius: 0 3px 0 0 }
+
+.widget > ul > li:last-child > a
+{
+  border: none;
+  border-radius: 0 0 3px 0;
+}
+
+*{
+	font-family: "Noto Sans CJK TC Light";
+}
+.green{
+	border: 1px solid green;
+	color: green
+}
+.green:hover{
+	background: green;
+	color: white;
+}
+.red{
+	border: 1px solid red;
+	color: red
+}
+.red:hover{
+	background: red;
+	color: white
+}
+.bty{
+  cursor: pointer;
+  background-color: rgba(255,255,255,0.5);
+  /* border: 1px solid green; */
+  padding: 10px 15px;
+  border-radius: 5px;
+  position: relative;
+  top: -25px;
+}
+</style>
+</head>
+<body>
+	<!--
+
+	  Take a look at this wonderful widget by José Polanco
+	  http://dribbble.com/shots/1439808-Profile-Widget
+
+	-->
+
+	<div class="widget">
+	  <div class="cover">
+	    <img src="http://25.media.tumblr.com/d55a509993790027240311c9f611aaf8/tumblr_n0hpzpKEfE1st5lhmo1_1280.jpg" />
+	  </div>
+	  <img src="<%= avator %>" class="photo" />
+	  <h1><%= name %></h1>
+	  <h2>Chenghsi member</h2>
+	  <h3>@<%= username %></h3>
+	  <% if(!self){ %> 
+	  	<div id="canchange">
+	  	<% if(!isFriend){ /*是不是關注關係*/ %> 
+	  		<button class="bty green" onclick="lookup()"> + Lookup </button>
+	  	<% }else{ %>
+	  		<button class="bty red" onclick="goback()"> Remove Lookup </button>
+	  	<% } %>
+	  	</div>
+	  <% } %>
+	</div>
+
+	<style type="text/css">
+		#Post_article{
+			width:320px;
+			/*height: 120px;*/
+			background:white;
+			border-radius: 5px;
+			margin: 0px auto;
+			
+		}
+
+		.profile{
+			
+		}
+
+		.pimg{
+			width: 50px;
+			height: 50px;
+			margin: 10px;
+			float:left;
+		}
+		.p_a{
+			float: left;
+			padding: 1px;
+  			line-height: 9px;
+  			  width: 77%;
+		  margin-top: 4px;
+		  height: 53px;
+		  margin-bottom: 8px;
+		}
+		.article{
+			margin-top:15px;
+			width:320px;
+			background:white;
+			border-radius: 5px;
+			margin: 0px auto;
+			padding-bottom: 5px;
+		}
+		#btncon{
+			    padding: 10px;
+  				padding-bottom: 50px;
+		}
+		
+		#btnsed{
+			float: right;
+		  background-color: rgba(255,255,255,0.5);
+		  border: 1px solid green;
+		  padding: 10px 15px;
+		  border-radius: 5px;
+		  cursor: pointer;
+		  color: green;
+		}
+		#btnsed:hover{
+			  background-color: green;
+			  color: white;
+		}
+		.bap{
+			  padding-top: 60px;
+  				padding-left: 10px;
+  				width: 95%;
+		}
+	</style>
+	<div id="timeline">
+		<% if(self){ %>
+		<div id="Post_article">
+			<div class="profile">
+				<img src="<%= avator %>" class="pimg"/>
+				<div class="p_a">
+					<p><%= name %></p>
+					<span style="font-size:9px;color:#A2A2A2">@<%= username %></span>
+				</div>
+			</div>
+			<div>
+				<p style="position: relative;left: -40px;">Say: </p>
+				<textarea name="article" style="position: relative;left: 10px;width: 92%;height: 70px;"></textarea>
+				<div id="btncon">
+					<button onclick="post()" value="POST" id="btnsed">發布動態</button> 
+				</div>
+			</div>
+			<br>
+		</div>
+		<% } %>
+		<div id="t_art">
+			<% for(var i = article.length-1;i>=0;i--){ %>
+				<div class="article" style="margin-top: 15px;">
+					<div class="profile">
+						<img src="<%= avator %>" class="pimg"/>
+						<div class="p_a">
+							<p><%= name %></p>
+							<span style="font-size:9px;color:#A2A2A2">@<%= username %></span>
+						</div>
+					</div>
+					<div class="bap">
+						<p class="contents"><%= article[i].content %></p>
+					</div>
+				</div>
+			<% } %>
+		</div>
+	</div>
+	<br><br>
+	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script type="text/javascript">
+		var n = '';
+		function post(){
+			var article = document.getElementsByName("article")[0].value;
+			n = article;
+			$.ajax({
+			  type: "POST",
+			  url: '/post',
+			  data: {article:article},
+			  success: addArticle
+			});
+		}
+		function addArticle(data, textStatus, jqXHR){
+			document.getElementsByName("article")[0].value = "";
+			var strHtml = create('<div class="article" style="margin-top: 15px;"><div class="profile"><img src="<%= avator %>" class="pimg"/><div class="p_a"><p><%= name %></p><span style="font-size:9px;color:#A2A2A2">@<%= username %></span></div></div><div class="bap"><p class="contents">'+n+'</p></div></div>');
+			var nS = document.getElementById('t_art').insertBefore(strHtml,document.getElementById('t_art').firstChild);
+			var newEle = document.getElementsByClassName("article")[0];
+			fadeIn(newEle);
+			xx();
+		}
+		function create(htmlStr) { //create HTML element of string
+		    var frag = document.createDocumentFragment(),
+		        temp = document.createElement('div');
+		    temp.innerHTML = htmlStr;
+		    while (temp.firstChild) {
+		        frag.appendChild(temp.firstChild);
+		    }
+		    return frag;
+		}
+		function fadeIn(el, display){
+		  el.style.opacity = 0;
+		  el.style.display = display || "block";
+		  (function fade() {
+		    var val = parseFloat(el.style.opacity);
+		    if (!((val += .03) > 1)) {
+		      el.style.opacity = val;
+		      requestAnimationFrame(fade);
+		    }
+		  })();
+		}
+
+		function lookup(){
+			$.ajax({
+			  type: "POST",
+			  url: '/lookup',
+			  data: {friend:"<%= username %>"},
+			  success: function(a,b,c){ /* 調換成可以用 */
+			  	document.getElementById("canchange").innerHTML = '<button class="bty red" onclick="goback()"> Remove Lookup </button>';
+			  }
+			});
+		}
+		function goback(){
+			$.ajax({
+			  type: "POST",
+			  url: '/unlookup',
+			  data: {friend:"<%= username %>"},
+			  success: function(a,b,c){ /* 調換成可以用 */
+			  	document.getElementById("canchange").innerHTML = '<button class="bty green" onclick="lookup()"> + Lookup </button>';
+			  }
+			});	
+		}
+
+		function xx(){
+			var contents = document.getElementsByClassName('contents');
+
+			for (var i = 0; i < contents.length; i++) {
+				youtube(contents[i].innerHTML,i);
+			};
+		}
+		xx();
+		function youtube(str,index){
+			if(str.indexOf('youtube.com')){
+				var n = str.split('?v=')[1];
+
+				var s = '<iframe width="300" src="https://www.youtube.com/embed/'+n+'" frameborder="0" allowfullscreen></iframe>'
+
+				document.getElementsByClassName('contents')[index].innerHTML = s;
+			}
+		}
+	</script>
+</body>
+</html>
